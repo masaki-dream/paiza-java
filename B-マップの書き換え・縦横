@@ -1,0 +1,71 @@
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) {
+        // 自分の得意な言語で
+        // Let's チャレンジ！！
+        Scanner sc = new Scanner(System.in);
+        
+        var h = sc.nextInt();
+        var w = sc.nextInt();
+        var s = new String[h][w];
+        
+        for (int i = 0; i < h; i++) {
+            s[i] = sc.next().split("");
+        }
+        
+        var y = sc.nextInt();
+        var x = sc.nextInt();
+        
+        if (s[y][x].equals("#")) {
+            s[y][x] = ".";
+        } else {
+            s[y][x] = "#";
+        }
+        
+        // y + 1を反転させる
+        if (0 <= y + 1 && y + 1 < h) {
+            if (s[y + 1][x].equals("#")) {
+                s[y + 1][x] = ".";
+            } else {
+                s[y + 1][x] = "#";
+            }
+        }
+        
+        // y - 1を反転させる
+        if (0 <= y - 1 && y - 1 < h) {
+            if (s[y - 1][x].equals("#")) {
+                s[y - 1][x] = ".";
+            } else {
+                s[y - 1][x] = "#";
+            }
+        }
+        
+        // x + 1を反転させる
+        if (0 <= x + 1 && x + 1 < w) {
+            if (s[y][x + 1].equals("#")) {
+                s[y][x + 1] = ".";
+            } else {
+                s[y][x + 1] = "#";
+            }
+        }
+        
+        // x - 1を反転させる
+        if (0 <= x - 1 && x - 1 < w) {
+            if (s[y][x - 1].equals("#")) {
+                s[y][x - 1] = ".";
+            } else {
+                s[y][x - 1] = "#";
+            }
+        }
+        
+        // 出力
+        for (var i = 0; i < h; i++) {
+            for (var j = 0; j < w; j++) {
+                System.out.print(s[i][j]);
+            }
+            System.out.println();
+        }
+    }
+}
