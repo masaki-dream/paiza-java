@@ -1,0 +1,46 @@
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        
+        var y = sc.nextInt();
+        var x = sc.nextInt();
+        var h = sc.nextInt();
+        
+        var l_a = new int[5];
+        for (int i = 0; i < 5; i++) {
+            l_a[i] = sc.nextInt();
+        }
+        
+        var m_a = new int[6];
+        for (int i = 0; i < 6; i++) {
+            m_a[i] = sc.nextInt();
+        }
+        
+        // 高さが l_1 cm 以下の場合
+        if (h <= l_a[0]) {
+            if (Math.max(y,x) <= l_a[1]) {
+                System.out.println(m_a[0]);
+                return;
+            } else if ((y + x) <= l_a[2]) {
+                System.out.println(m_a[1]);
+                return;
+            } else {
+                System.out.println(m_a[2]);
+                return;
+            }
+        } else if (Math.max(h, Math.max(y, x)) <= l_a[3]) {
+            System.out.println(m_a[3]);
+            return;
+        } else if ((y + x + h) <= l_a[4]) {
+            System.out.println(m_a[4]);
+            return;
+        } else {
+            System.out.println((y * x * h) * m_a[5]);
+            return;
+        }
+    }
+}
