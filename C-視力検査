@@ -1,0 +1,100 @@
+import java.util.*;
+
+
+public class Main {
+    
+    public static void main(String[] args) {
+    
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        var check = new String[n];
+        var result = new String[n];
+        
+        var TA_OK = 0;
+        var TA_NG = 0;
+        boolean taa = false;
+        
+        var TB_OK = 0;
+        var TB_NG = 0;
+        boolean tbb = false;
+        
+        var TC_OK = 0;
+        var TC_NG = 0;
+        boolean tcc = false;
+        
+        var TD_OK = 0;
+        var TD_NG = 0;
+        boolean tdd = false;
+        
+        for (var i = 0; i < n; i++) {
+            check[i] = sc.next();
+            result[i] = sc.next();
+            
+            if (check[i].equals("TA")) {
+                
+                if (TA_OK == 2 && TA_NG < 2) {
+                    taa = true;
+                }
+                
+                if (result[i].equals("ok")) {
+                    TA_OK++;
+                } else {
+                    TA_NG++;
+                }
+            } else if (check[i].equals("TB")) {
+                
+                if (TB_OK == 2 && TB_NG < 2) {
+                    tbb = true;
+                }
+                
+                if (result[i].equals("ok")) {
+                    TB_OK++;
+                } else {
+                    TB_NG++;
+                }
+            } else if (check[i].equals("TC")) {
+                
+                if (TC_OK == 2 && TC_NG < 2) {
+                    tcc = true;
+                }
+                
+                if (result[i].equals("ok")) {
+                    TC_OK++;
+                } else {
+                    TC_NG++;
+                }
+            } else if (check[i].equals("TD")) {
+                
+                if (TD_OK == 2 && TD_NG < 2) {
+                    tdd = true;
+                }
+                
+                if (result[i].equals("ok")) {
+                    TD_OK++;
+                } else {
+                    TD_NG++;
+                }
+            }
+        
+        }
+        
+        // okの箱が2以上かつngの箱が2より下の数で出力。またはそれぞれのboolan型がtrueで出力される。
+            if (TA_OK >= 2 && TA_NG < 2 || taa == true) {
+                System.out.println("A");
+                return;
+            } else if (TB_OK >= 2 && TB_NG < 2 || tbb == true) {
+                System.out.println("B");
+                return;
+            } else if (TC_OK >= 2 && TC_NG < 2 || tcc == true) {
+                System.out.println("C");
+                return;
+            } else if (TD_OK >= 2 && TD_NG < 2 || tdd == true) {
+                System.out.println("D");
+                return;
+            } else {
+                System.out.println("E");
+                return;
+            }
+        }
+    }
