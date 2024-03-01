@@ -1,0 +1,132 @@
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+        
+        var n = sc.nextInt();
+        var a = new int[n + 1][n + 1];
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                a[i][j] = sc.nextInt();
+            }
+        }
+        
+        var max1 = 0;
+        for (int i = 0; i < n; i++) {
+            var check = 0;
+            for (int j = 0; j < n; j++) {
+                check += a[i][j];
+            }
+            max1 = Math.max(max1, check);
+        }
+        
+        var max2 = 0;
+        for (int i = 0; i < n; i++) {
+            var check = 0;
+            for (int j = 0; j < n; j++) {
+                check += a[j][i];
+            }
+            max2 = Math.max(max2, check);
+        }
+        
+        var max3 = Math.max(max1, max2);
+        var max4 = 0;
+        
+        // 斜め右下の実装
+        for (int i = 0; i < n; i++) {
+            var check = 0;
+            boolean firstKey = false;
+            var d = 0;
+            for (int j = 0; j < n; j++) {
+                
+                if (!firstKey) {
+                    check = a[i][j];
+                    firstKey = true;
+                    continue;
+                }
+                
+                if (a[d + i + 1][j] != 0) {
+                    check += a[d + i + 1][j];
+                    d++;
+                }
+            }
+            max4 = Math.max(max4, check);
+        }
+        
+        var max5 = Math.max(max3, max4);
+        var max6 = 0;
+        
+        // 斜め右上の実装
+        for (int i = 0; i < 1; i++) {
+            var check = 0;
+            boolean firstKey = false;
+            var d = 0;
+            for (int j = 1; j < n; j++) {
+                
+                if (!firstKey) {
+                    check = a[i][j];
+                    firstKey = true;
+                    continue;
+                }
+                
+                if (a[d + i + 1][j] != 0) {
+                    check += a[d + i + 1][j];
+                    d++;
+                }
+            }
+            max6 = Math.max(max6, check);
+        }
+        // 右斜線完了
+        var maxLeft = Math.max(max5, max6);
+        var max7 = 0;
+        
+        // 左斜線下の実装
+        for (int i = 0; i < n; i++) {
+            var check = 0;
+            boolean firstKey = false;
+            var d = 0;
+            for (int j = n - 1; j >= 0; j--) {
+                
+                if (!firstKey) {
+                    check = a[i][j];
+                    firstKey = true;
+                    continue;
+                }
+                
+                if (a[i + d + 1][j] != 0) {
+                    check += a[d + i + 1][j];
+                    d++;
+                }
+            }
+            max7 = Math.max(max7, check);
+        }
+        var max8 = Math.max(max7, maxLeft);
+        var max9 = 0;
+        // 左斜線上の実装
+        for (int i = 0; i < 1; i++) {
+            var check = 0;
+            boolean firstKey = false;
+            var d = 0;
+            for (int j = n - 2; j >= 0; j--) {
+                
+                if (!firstKey) {
+                    check = a[i][j];
+                    firstKey = true;
+                    continue;
+                }
+                
+                if (a[i + d + 1][j] != 0) {
+                    check += a[d + i + 1][j];
+                    d++;
+                }
+            }
+            max9 = Math.max(max9, check);
+        }
+        var Last = Math.max(max8, max9);
+        System.out.println(Last);
+    }
+}
