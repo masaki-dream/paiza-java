@@ -1,0 +1,92 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+    
+        Scanner sc = new Scanner(System.in);
+        
+        var a = new String[5][5];
+        for (int i = 0; i < 5; i++) {
+            a[i] = sc.next().split("");
+        }
+        
+        // 左上から右下にかけての処理
+        boolean firstKey = false;
+        
+        for (int i = 0; i < 1; i++) {
+            var countO = 0;
+            var countX = 0;
+            var aa = 0;
+            
+            for (int j = 0; j < 4; j++) {
+                
+                // 一番左上だけの処理(j == 4)
+                if (firstKey == false) {
+                    if (a[i][j].charAt(0) == 'O') {
+                        countO++;
+                    } else if (a[i][j].charAt(0) == 'X') {
+                        countX++;
+                    }
+                    firstKey = true;
+                }
+                
+                // jが3 ~ 1の処理
+                if (a[i + aa + 1][j + 1].charAt(0) == 'O') {
+                    countO++;
+                } else if (a[i + aa + 1][j + 1].charAt(0) == 'X') {
+                    countX++;
+                }
+                
+                aa++;
+            }
+            
+            if (countO == 5) {
+                System.out.println("O");
+                return;
+            } else if (countX == 5) {
+                System.out.println("X");
+                return;
+            }
+        }
+        
+        // 右上から左下にかけての処理
+        boolean firstKeys = false;
+        
+        for (int i = 0; i < 1; i++) {
+            var countO = 0;
+            var countX = 0;
+            var aa = 0;
+            
+            for (int j = 4; j >= 1; j--) {
+                
+                // 一番右上だけの処理(j == 4)
+                if (firstKeys == false) {
+                    if (a[i][j].charAt(0) == 'O') {
+                        countO++;
+                    } else if (a[i][j].charAt(0) == 'X') {
+                        countX++;
+                    }
+                    firstKeys = true;
+                }
+                
+                // jが3 ~ 1の処理
+                if (a[i + aa + 1][j - 1].charAt(0) == 'O') {
+                    countO++;
+                } else if (a[i + aa + 1][j - 1].charAt(0) == 'X') {
+                    countX++;
+                }
+                
+                aa++;
+            }
+
+            if (countO == 5) {
+                System.out.println("O");
+                return;
+            } else if (countX == 5) {
+                System.out.println("X");
+                return;
+            }
+        }
+        System.out.println("D");
+    }
+}
