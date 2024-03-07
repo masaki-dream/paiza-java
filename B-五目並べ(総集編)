@@ -1,0 +1,137 @@
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) {
+    
+        Scanner sc = new Scanner(System.in);
+        
+        var a = new String[5][5];
+        
+        for (int i = 0; i < 5; i++) {
+            a[i] = sc.next().split("");
+        }
+        
+        // 横の列を見る処理
+        for (int i = 0; i < 5; i++) {
+            var countO = 0;
+            var countX = 0;
+            for (int j = 0; j < 5; j++) {
+                
+                if (a[i][j].charAt(0) == 'O') {
+                    countO++;
+                } else if (a[i][j].charAt(0) == 'X') {
+                    countX++;
+                }
+            }
+            
+            if (countO == 5) {
+                System.out.println("O");
+                return;
+            } else if (countX == 5) {
+                System.out.println("X");
+                return;
+            }
+        }
+        
+        // 縦の列を見る処理
+        for (int i = 0; i < 5; i++) {
+            var countO = 0;
+            var countX = 0;
+            for (int j = 0; j < 5; j++) {
+                
+                if (a[j][i].charAt(0) == 'O') {
+                    countO++;
+                } else if (a[j][i].charAt(0) == 'X') {
+                    countX++;
+                }
+            }
+            
+            if (countO == 5) {
+                System.out.println("O");
+                return;
+            } else if (countX == 5) {
+                System.out.println("X");
+                return;
+            }
+        }
+        
+        // 斜め(\)の処理
+        boolean firstKey = false;
+        
+        for (int i = 0; i < 1; i++) {
+            var countO = 0;
+            var countX = 0;
+            var aa = 0;
+            
+            for (int j = 0; j < 4; j++) {
+                
+                if (firstKey == false) {
+                    if (a[i][j].charAt(0) == 'O') {
+                        countO++;
+                    } else if (a[i][j].charAt(0) == 'X') {
+                        countX++;
+                    }
+                    
+                    firstKey = true;
+                }
+                
+                if (a[i + aa + 1][j + 1].charAt(0) == 'O') {
+                    countO++;
+                } else if (a[i + aa + 1][j + 1].charAt(0) == 'X') {
+                    countX++;
+                }
+                
+                aa++;
+            }
+            
+             if (countO == 5) {
+                System.out.println("O");
+                return;
+            } else if (countX == 5) {
+                System.out.println("X");
+                return;
+            }
+        }
+        
+        // 斜め(/)の処理
+        boolean firstKeys = false;
+        
+        for (int i = 0; i < 1; i++) {
+            var countO = 0;
+            var countX = 0;
+            var aa = 0;
+            
+            for (int j = 4; j >= 1; j--) {
+                
+                if (firstKeys == false) {
+                    if (a[i][j].charAt(0) == 'O') {
+                        countO++;
+                    } else if (a[i][j].charAt(0) == 'X') {
+                        countX++;
+                    }
+                    
+                    firstKeys = true;
+                }
+                
+                if (a[i + aa + 1][j - 1].charAt(0) == 'O') {
+                    countO++;
+                } else if (a[i + aa + 1][j - 1].charAt(0) == 'X') {
+                    countX++;
+                }
+                
+                aa++;
+            }
+            
+            if (countO == 5) {
+                System.out.println("O");
+                return;
+            } else if (countX == 5) {
+                System.out.println("X");
+                return;
+            }
+        }
+        
+        System.out.println("D");
+    }
+}
