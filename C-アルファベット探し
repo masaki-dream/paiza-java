@@ -1,0 +1,23 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        
+        char x = sc.next().charAt(0);
+        char y = sc.next().charAt(0);
+        char c = sc.next().charAt(0);
+        ArrayList<Character> a = new ArrayList<>();
+        
+        for (char cc = x; cc <= y; cc++) {
+            a.add(cc);
+        }
+        
+        if (a.contains(c)) {
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
+    }
+}
