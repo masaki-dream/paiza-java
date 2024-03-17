@@ -1,0 +1,109 @@
+import java.util.*;
+
+class Hero {
+    int l, h, a, d, s, c, f;
+    
+    Hero(int l, int h, int a, int d, int s, int c, int f) {
+        this.l = l;
+        this.h = h;
+        this.a = a;
+        this.d = d;
+        this.s = s;
+        this.c = c;
+        this.f = f;
+    }
+    
+    void levelup(int h, int a, int d, int s, int c, int f) {
+        l++;
+        this.h += h;
+        this.a += a;
+        this.d += d;
+        this.s += s;
+        this.c += c;
+        this.f += f;
+    }
+    
+    void muscle_training(int h, int a) {
+        this.h += h;
+        this.a += a;
+    }
+    
+    void running(int d, int s) {
+        this.d += d;
+        this.s += s;
+    }
+    
+    void study(int c) {
+        this.c += c;
+    }
+    
+    void pray(int f) {
+        this.f += f;
+    }
+    
+    @Override
+        public String toString() {
+        return String.format("%d %d %d %d %d %d %d", l, h, a, d, s, c, f);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        Hero[] Heros = new Hero[n + 1];
+        
+        for (int i = 1; i <= n; i++) {
+            int l = sc.nextInt();
+            int h = sc.nextInt();
+            int a = sc.nextInt();
+            int d = sc.nextInt();
+            int s = sc.nextInt();
+            int c = sc.nextInt();
+            int f = sc.nextInt();
+            
+            Heros[i] = new Hero(l, h, a, d, s, c, f);
+        }
+        
+        for (int i = 0; i < k; i++) {
+            int index = sc.nextInt();
+            String ss = sc.next();
+            
+            if (ss.equals("levelup")) {
+                int h = sc.nextInt();
+                int a = sc.nextInt();
+                int d = sc.nextInt();
+                int s = sc.nextInt();
+                int c = sc.nextInt();
+                int f = sc.nextInt();
+                Heros[index].levelup(h, a, d, s, c, f);
+                
+            } else if (ss.equals("muscle_training")) {
+                int h = sc.nextInt();
+                int a = sc.nextInt();
+                Heros[index].muscle_training(h, a);
+                
+            } else if (ss.equals("running")) {
+                int d = sc.nextInt();
+                int s = sc.nextInt();
+                Heros[index].running(d, s);
+                
+            } else if (ss.equals("study")) {
+                int c = sc.nextInt();
+                Heros[index].study(c);
+                
+            } else if (ss.equals("pray")) {
+                int f = sc.nextInt();
+                Heros[index].pray(f);
+            }
+        }
+        
+        for (int i = 1; i <= n; i++) {
+            System.out.println(Heros[i]);
+        }
+        
+    }
+}
