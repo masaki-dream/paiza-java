@@ -1,0 +1,75 @@
+import java.util.*;
+
+class robot {
+    static int[] level = new int[] {0, 1, 2, 5, 10};
+    int x, y, l;
+    
+    robot(int x, int y, int l) {
+        this.x = x;
+        this.y = y;
+        this.l = l;
+    }
+    
+    void move(String s) {
+        if (s.equals("N")) {
+            y -= level[l];
+        } else if (s.equals("S")) {
+            y += level[l];
+        } else if (s.equals("W")) {
+            x -= level[l];
+        } else if (s.equals("E")) {
+            x += level[l];
+        }
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("%d %d %d", x, y, l);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+       
+        Scanner sc = new Scanner(System.in);
+        
+        int h = sc.nextInt();
+        int w = sc.nextInt();
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        
+        int[] lx = new int[10];
+        int[] ly = new int[10];
+        
+        for (int i = 0; i < 10; i++) {
+            lx[i] = sc.nextInt();
+            ly[i] = sc.nextInt();
+        }
+        
+        robot[] robots = new robot[n];
+        for (int i = 0; i < n; i++) {
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+            int l = sc.nextInt();
+            
+            robots[i] = new robot(x, y, l);
+        }
+        
+        for (int i = 0; i < k; i++) {
+            int index = sc.nextInt() - 1;
+            String s = sc.next();
+            
+            for (int j = 0; j < 10; j++) {
+                if (robots[index].x == lx[j] && robots[index].y == ly[j]) {
+                    robots[index].l++;
+                }
+            }
+            
+            robots[index].move(s);
+        }
+        
+        for (int i = 0; i < n; i++) {
+            System.out.println(robots[i]);
+        }
+    }
+}
