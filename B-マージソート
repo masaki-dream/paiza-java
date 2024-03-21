@@ -1,0 +1,77 @@
+import java.util.*;
+
+public class Main {
+    
+    static final int INF = 1000000001;
+    static int count = 0;
+    
+    static void marge(int a[], int left, int mid, int right) {
+        int nl = mid - left;
+        int nr = right - mid;
+        int[] l = new int[nl + 1];
+        int[] r = new int[nr + 1];
+        
+        for (int i = 0; i < nl; i++) {
+            l[i] = a[left + i];
+        }
+        
+        for (int i = 0; i < nr; i++) {
+            r[i] = a[mid + i];
+        }
+        
+        l[nl] = INF;
+        r[nr] = INF;
+        
+        int lindex = 0;
+        int rindex = 0;
+        
+        // 0~9までのfor文(left = 0, right = 10)
+        for (int i = left; i < right; i++) {
+            
+            if (l[lindex] < r[rindex]) {
+                a[i] = l[lindex];
+                lindex++;
+            } else {
+                a[i] = r[rindex];
+                rindex++;
+                count++;
+            }
+        }
+    }
+    
+    static void marge_sort(int a[], int left, int right) {
+        if (left + 1 < right) {
+            int mid = ((left + right) / 2);
+            marge_sort(a, left, mid);
+            marge_sort(a, mid, right);
+            marge(a, left, mid, right);
+        }
+    }
+    
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        var a = new int[n];
+        
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        
+        marge_sort(a, 0, n);
+        
+        for (int i = 0; i < n; i++) {
+            
+            if (i > 0) {
+                System.out.print(" ");
+            }
+            
+            System.out.print(a[i]);
+        }
+        
+        System.out.println();
+        System.out.println(count);
+        
+    }
+}
