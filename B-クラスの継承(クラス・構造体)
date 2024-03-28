@@ -1,0 +1,82 @@
+import java.util.*;
+
+class Customer {
+    protected int amount;
+    
+    Customer() {
+        amount = 0;
+    }
+    
+    void food(int check) {
+        amount += check;
+    }
+    
+    void softdrink(int check) {
+        amount += check;
+    }
+    
+    void alcohol(int check) {};
+}
+
+class Adult extends Customer {
+    
+    boolean ok;
+    
+    Adult() {
+        super();
+        boolean ok = false;
+    }
+    
+    @Override
+    void food(int check) {
+        if (ok == true) {
+            check -= 200;
+        }
+        super.food(check);
+    }
+
+    
+    @Override
+    void alcohol(int check) {
+        ok = true;
+        amount += check;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        ArrayList<Customer> Customers = new ArrayList<>();
+        
+        for (int i = 0; i < n; i++) {
+            int old = sc.nextInt();
+            
+            if (old >= 20) {
+                Customers.add(new Adult());
+            } else {
+                Customers.add(new Customer());
+            }
+        }
+        
+        for (int i = 0; i < k; i++) {
+            int index = sc.nextInt() - 1;
+            String menu = sc.next();
+            int check = sc.nextInt();
+            
+            if (menu.equals("food")) {
+                Customers.get(index).food(check);
+            } else if (menu.equals("softdrink")) {
+                Customers.get(index).softdrink(check);
+            } else if (menu.equals("alcohol")) {
+                Customers.get(index).alcohol(check);
+            }
+        }
+        
+        for (Customer cc : Customers) {
+            System.out.println(cc.amount);
+        }
+    }
+}
