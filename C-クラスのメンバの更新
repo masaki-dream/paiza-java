@@ -1,0 +1,64 @@
+import java.util.*;
+
+class employee {
+    int number;
+    String name;
+    
+    employee(int number, String name) {
+        this.number = number;
+        this.name = name;
+    }
+    
+    void getnum() {
+        System.out.println(this.number);
+    }
+    
+    void getname() {
+        System.out.println(this.name);
+    }
+    
+    void change_num(int newNumber) {
+        this.number = newNumber;
+    }
+    
+    void change_name(String newName) {
+        this.name = newName;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        ArrayList<employee> employees = new ArrayList<>();
+        
+        for (int i = 0; i < n; i++) {
+            String action = sc.next();
+            
+            if (action.equals("make")) {
+                int number = sc.nextInt();
+                String name = sc.next();
+                employees.add(new employee(number, name));
+                
+            } else if (action.equals("getnum")) {
+                int index = sc.nextInt() - 1;
+                employees.get(index).getnum();
+                
+            } else if (action.equals("getname")) {
+                int index = sc.nextInt() - 1;
+                employees.get(index).getname();
+                
+            } else if (action.equals("change_num")) {
+                int index = sc.nextInt() - 1;
+                int newNumber = sc.nextInt();
+                employees.get(index).change_num(newNumber);
+                
+            } else if (action.equals("change_name")) {
+                int index = sc.nextInt() - 1;
+                String newName = sc.next();
+                employees.get(index).change_name(newName);
+            }
+        }
+    }
+}
