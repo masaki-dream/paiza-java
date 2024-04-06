@@ -1,0 +1,99 @@
+import java.util.*;
+
+class Custmer {
+    static int count = 0;
+    int amount = 0;
+    
+    Custmer() {
+        this.amount = amount;
+    }
+    
+    void takeFood(int m) {
+        amount += m;
+    }
+    
+    void takeSoftdrink(int m) {
+        amount += m;
+    }
+    
+    // オーバーロード
+    void takeAlcohol(int m) {}
+    void takeAlcohol() {}
+}
+
+class Adult extends Custmer {
+    boolean check;
+    
+    Adult() {
+        super();
+        check = false;
+    }
+    
+    @Override
+    void takeFood(int m) {
+        if (check) {
+            m -= 200;
+        }
+        amount += m;
+    }
+    
+    @Override
+    void takeSoftdrink(int m) {
+        amount += m;
+    }
+    
+    @Override
+    void takeAlcohol(int m) {
+        check = true;
+        amount += m;
+    }
+    
+    // ビールの処理
+    @Override
+    void takeAlcohol() {
+        check = true;
+        amount += 500;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        Custmer[] Custmers = new Custmer[n];
+        
+        for (int i = 0; i < n; i++) {
+            int age = sc.nextInt();
+            if (age >= 20) {
+                Custmers[i] = new Adult();
+            } else if (age < 20) {
+                Custmers[i] = new Custmer();
+            }
+        }
+        
+        for (int i = 0; i < k; i++) {
+            int index = sc.nextInt() - 1;
+            String action = sc.next();
+            
+            if (action.equals("0")) {
+                Custmers[index].takeAlcohol();
+            } else if (action.equals("A")) {
+                Custmers[index].count++;
+                System.out.println(Custmers[index].amount);
+            } else {
+                int m = sc.nextInt();
+                if (action.equals("food")) {
+                    Custmers[index].takeFood(m);
+                } else if (action.equals("softdrink")) {
+                    Custmers[index].takeSoftdrink(m);
+                } else if (action.equals("alcohol")) {
+                    Custmers[index].takeAlcohol(m);
+                }
+            }
+        }
+        
+        System.out.println(Custmer.count);
+    }
+}
